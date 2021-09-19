@@ -47,3 +47,9 @@ for (val in quantitative) {
   print(paste("Mean diff", mean_diff,
    "- Sd diff", sd_diff))
 }
+
+#2.5
+pairs(autos)
+
+#2.6
+pairs(autos, verInd=1)
