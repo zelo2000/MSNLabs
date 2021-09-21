@@ -8,6 +8,10 @@ pairs(~age+tax+crim+rad+ptratio, Boston)
 
 # 3.3
 pairs(Boston, verInd=1)
+attach(Boston)
+hist(crim)
+hist(tax)
+hist(ptratio)
 cat("\n")
 
 # 3.4
@@ -20,7 +24,7 @@ print(paste("Bounds river:", sum(Boston$chas == 1)))
 cat("\n")
 
 # 3.6
-print(paste("Median P/t ration:", median(Boston$ptratio)))
+print(paste("Median P/t ratio:", median(Boston$ptratio)))
 cat("\n")
 
 # 3.7
