@@ -8,15 +8,15 @@ pairs(~age+tax+crim+rad+ptratio, Boston)
 
 # 3.3
 pairs(Boston, verInd=1)
-attach(Boston)
-hist(crim)
-hist(tax)
-hist(ptratio)
 cat("\n")
 
 # 3.4
 Boston$chas = as.factor(Boston$chas)
 print(summary(Boston))
+attach(Boston)
+hist(crim)
+hist(tax)
+hist(ptratio)
 cat("\n")
 
 # 3.5
