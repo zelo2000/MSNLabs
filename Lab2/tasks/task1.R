@@ -13,6 +13,6 @@ summary(lm.fit)
 plot(autos$mpg)
 abline(lm.fit)
 
-#1.3
+# 1.3
 par(mfrow=c(2,2))
 plot(lm.fit)
