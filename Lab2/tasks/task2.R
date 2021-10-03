@@ -23,7 +23,7 @@ lm.fit = lm(mpg~.-name, data=autos)
 print(summary(lm.fit))
 
 # 2.4
-par(mfrow=c(3,3))
+par(mfrow=c(2,2))
 plot(lm.fit)
 
 # 2.5
