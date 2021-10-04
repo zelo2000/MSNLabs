@@ -9,8 +9,14 @@ lm.fit = lm(mpg~horsepower,data=autos)
 lm.fit
 summary(lm.fit)
 
+predict(lm.fit, data.frame(horsepower=c(98)), interval="confidence")
+predict(lm.fit, data.frame(horsepower=c(98)), interval="prediction")
+
+predict(lm.fit, data.frame(horsepower=c(95)), interval="confidence")
+predict(lm.fit, data.frame(horsepower=c(95)), interval="prediction")
+
 # 1.2
-plot(autos$mpg)
+plot(autos$horsepower, autos$mpg)
 abline(lm.fit)
 
 # 1.3
