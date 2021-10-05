@@ -32,6 +32,7 @@ abline(fit1, lwd=3, col="red")
 
 # 6.7
 fit2 = lm(y ~ x + I(x^2))
+print(summary(fit2))
 print(anova(fit1, fit2))
 
 # 6.8
