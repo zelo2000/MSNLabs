@@ -53,7 +53,6 @@ lm.all = lm(crim~., data=Boston)
 print(summary(lm.all))
 
 # 8.3
-library(car)
 all_coeffs = c(coefficients(lm.zn)[2],
       coefficients(lm.indus)[2],
       coefficients(lm.chas)[2],
@@ -70,7 +69,7 @@ all_coeffs = c(coefficients(lm.zn)[2],
 
 print(all_coeffs)
 cat("\n")
-print(vif(lm.all))
+print(coefficients(lm.all)[2:14])
 
 # 8.4
 lm.zn = lm(crim~poly(zn, 3))
