@@ -37,14 +37,14 @@ print(anova(fit1, fit2))
 
 # 6.8
 eps2 = rnorm(100, 0, 0.05)
-y2 = y = -1 + 0.5*x + eps2
+y2 = -1 + 0.5*x + eps2
 
 fit3 = lm(y2~x)
 print(summary(fit3))
 
 # 6.9
 eps3 = rnorm(100, 0, 0.5)
-y3 = y = -1 + 0.5*x + eps3
+y3 = -1 + 0.5*x + eps3
 
 fit4 = lm(y3~x)
 print(summary(fit4))
