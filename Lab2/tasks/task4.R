@@ -28,5 +28,6 @@ print(paste('T-statistic: ',
 lm.fit = lm(y~x)
 lm.fit2 = lm(x~y)
 
-print(summary(lm.fit))
-print(summary(lm.fit2))
+cat("\n")
+print(coefficients(summary(lm.fit)))
+print(coefficients(summary(lm.fit2)))
