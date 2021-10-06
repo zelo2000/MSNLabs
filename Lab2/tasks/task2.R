@@ -5,12 +5,12 @@ autos = na.omit(autos)
 fix(autos)
 
 # 2.1
-qualitative = c(2, 7, 8, 9)
-for (val in qualitative) {
-  autos[, val] = as.factor(autos[, val])
-}
+# qualitative = c(2, 7, 8, 9)
+# for (val in qualitative) {
+#   autos[, val] = as.factor(autos[, val])
+# }
 
-pairs(autos)
+# pairs(autos)
 
 cat("\n")
 
@@ -27,10 +27,8 @@ par(mfrow=c(2,2))
 plot(lm.fit)
 
 # 2.5
-lm.fit2 = lm(mpg~cylinders + displacement + horsepower + weight + acceleration +
-    year*origin, data=autos)
+lm.fit2 = lm(mpg~displacement*origin+acceleration*horsepower, data=autos)
 print(summary(lm.fit2))
-print(anova(lm.fit, lm.fit2))
 
 cat("\n")
 
