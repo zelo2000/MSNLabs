@@ -34,7 +34,7 @@ Weekly.test = Weekly[!train, ]
 Direction.test = Direction[!train]
 
 cat("\n")
-print(paste("Rows of train data: ", dim(Weekly.test)[1]))
+print(paste("Rows of test data: ", dim(Weekly.test)[1]))
 
 fit.glm2 = glm(Direction ~ Lag2, data = Weekly, family = binomial, subset = train)
 print(summary(fit.glm2))
