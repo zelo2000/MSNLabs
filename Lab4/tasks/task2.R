@@ -10,7 +10,8 @@ print(summary(fit.glm)$coef)
 
 # 2.2
 boot.fn = function(data, index) {
-    fit = glm(default ~ income + balance, data = data, family = "binomial", subset = index)
+    fit = glm(default ~ income + balance, data = data,
+     family = "binomial", subset = index)
     return (coef(fit))
 }
 

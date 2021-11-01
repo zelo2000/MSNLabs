@@ -6,11 +6,12 @@ attach(Boston)
 # 5.1
 cat("\n")
 medv_mean = mean(medv)
-print(paste("Mean of medv: ", round(medv_mean, 2)))
+print(paste("Середнє для змiнної medv: ", round(medv_mean, 2)))
+cat("\n")
 
 # 5.2
 medv_se = sd(medv) / sqrt(length(medv))
-print(paste("Standard error: ", round(medv_se * 100, 2), "%"))
+print(paste("Стандартна похибка для змiнної medv: ", round(medv_se * 100, 2), "%"))
 
 # 5.3
 library(boot)
@@ -32,7 +33,7 @@ print(ci)
 # 5.5
 cat("\n")
 medv_median = median(medv)
-print(paste("Median of medv: ", round(medv_median, 2)))
+print(paste("Медiана для змiнної medv: ", round(medv_median, 2)))
 
 # 5.6
 boot.fn2 = function(data, index) {
