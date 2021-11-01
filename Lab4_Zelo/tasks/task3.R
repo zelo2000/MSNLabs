@@ -1,0 +1,43 @@
+# 3
+# 3.1
+library(ISLR)
+attach(Weekly)
+set.seed(1)
+
+fit.glm = glm(Direction ~ Lag1 + Lag2, data = Weekly, family = "binomial")
+summary(fit.glm)$coef
+cat("\n")
+
+# 3.2
+fit.glm2 = glm(Direction ~ Lag1 + Lag2, data = Weekly[-1, ], family = "binomial")
+summary(fit.glm)$coef
+
+# 3.3
+contrasts(Direction)
+cat("\n")
+
+if (predict.glm(fit.glm2, Weekly[1, ], type = "response") > 0.5) {
+  if (Direction[1] == "Up") {
+    print("Вірний прогноз для першого спостереження")
+  }
+  else {
+   print("Вірний прогноз для першого спостереження") 
+  }
+}
+cat("\n")
+
+# 3.4
+error_list = rep(0, length(Direction))
+
+for (i in 1:length(Direction)) {
+    fit.glm = glm(Direction ~ Lag1 + Lag2, data = Weekly[-i, ],  family = "binomial")
+    
+    if (predict.glm(fit.glm2, Weekly[i, ], type = "response") > 0.5) {
+      if (Direction[i] == "Down") {
+        error_list[i] = 1
+      }
+    }
+}
+
+# 3.5
+paste("Оцiнка LOOCV :", round(mean(error_list), 2))
