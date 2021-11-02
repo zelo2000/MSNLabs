@@ -8,7 +8,7 @@ mean(medv)
 
 # 5.2
 medv_se = sd(medv) / sqrt(length(medv))
-paste("Стандартна похибка: ", round(medv_se, 2))
+paste("Noaiaa?oia iioeaea: ", round(medv_se, 2))
 
 # 5.3
 library(boot)
@@ -18,13 +18,13 @@ boot.fn = function(data, index) {
     return (mean(data[index]))
 }
 
-boot(medv, boot.fn, 100)
+boot(medv, boot.fn, 1000)
 
 # 5.4
 cat("\n")
 t.test(medv)
 
-ci = c(22.533 - 2 * 0.348, 22.533 + 2 * 0.348)
+ci = c(22.533 - 2 * 0.411, 22.533 + 2 * 0.411)
 ci
 
 # 5.5
@@ -36,7 +36,7 @@ boot.fn2 = function(data, index) {
     return (median(data[index]))
 }
 
-boot(medv, boot.fn2, 100)
+boot(medv, boot.fn2, 1000)
 
 # 5.7
 cat("\n")
@@ -47,5 +47,5 @@ boot.fn3 = function(data, index) {
     return (quantile(data[index], c(0.1)))
 }
 
-boot(medv, boot.fn3, 100)
+boot(medv, boot.fn3, 1000)
 
