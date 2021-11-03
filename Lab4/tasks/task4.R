@@ -44,6 +44,8 @@ LOOCV(1)
 LOOCV(10)
 LOOCV(100)
 
-# 4.5
+# 4.5 (manual description)
+
+# 4.6
 fit.glm = glm(y ~ poly(x, 4))
 print(summary(fit.glm))

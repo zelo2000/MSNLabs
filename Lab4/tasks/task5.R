@@ -11,7 +11,7 @@ cat("\n")
 
 # 5.2
 medv_se = sd(medv) / sqrt(length(medv))
-print(paste("Стандартна похибка для змiнної medv: ", round(medv_se * 100, 2), "%"))
+print(paste("Стандартна похибка для змiнної medv: ", round(medv_se, 2)))
 
 # 5.3
 library(boot)
