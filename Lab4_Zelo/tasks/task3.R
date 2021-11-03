@@ -19,17 +19,15 @@ predict.glm(fit.glm2, Weekly[1, ], type = "response") > 0.5
 cat("\n")
 
 # 3.4
-error_list = rep(0, length(Direction))
-
-for (i in 1:length(Direction)) {
+err = rep(0, dim(Weekly)[1])
+for (i in 1:dim(Weekly)[1]) {
     fit.glm = glm(Direction ~ Lag1 + Lag2, data = Weekly[-i, ],  family = "binomial")
-    
     if (predict.glm(fit.glm, Weekly[i, ], type = "response") > 0.5) {
       if (Direction[i] == "Down") {
-        error_list[i] = 1
+        err[i] = 1
       }
     }
 }
 
 # 3.5
-paste("ЮіГэър LOOCV :", round(mean(error_list), 2))
+paste("ЮіГэър LOOCV :", mean(err))
