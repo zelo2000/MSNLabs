@@ -1,7 +1,7 @@
 # 2
 library(ISLR)
 attach(College)
-fix(College)
+print(summary(College))
 
 # 2.1
 set.seed(1)
@@ -26,7 +26,7 @@ grid = 10 ^ seq(10, -2, length = 100)
 fit.ridge = glmnet(train.mat, College.train$Apps, alpha = 0,
  lambda = grid)
 cv.ridge = cv.glmnet(train.mat, College.train$Apps, alpha = 0,
- lambda = grid, grouped = FALSE)
+ lambda = grid)
 cat("\n")
 print(dim(coef(fit.ridge)))
 
@@ -39,7 +39,7 @@ print(paste("Test error: ", round(mean((pred.ridge - College.test$Apps)^2), 2)))
 fit.lasso = glmnet(train.mat, College.train$Apps, alpha = 1,
  lambda = grid)
 cv.lasso  = cv.glmnet(train.mat, College.train$Apps, alpha = 1,
- lambda = grid, grouped = FALSE)
+ lambda = grid)
 cat("\n")
 
 bestlam = cv.lasso$lambda.min
@@ -48,13 +48,13 @@ pred.lasso = predict(fit.lasso, s = bestlam, newx = test.mat)
 print(paste("Test error: ", round(mean((pred.lasso - College.test$Apps)^2), 2)))
 
 cat("\n")
-lasso_coefs = predict(fit.lasso, s = bestlam, type = "coefficients")
-print(lasso_coefs)
+lasso.coefs = predict(fit.lasso, s = bestlam, type = "coefficients")
+print(lasso.coefs)
 
 # 2.5
 library(pls)
 fit.pcr = pcr(Apps ~ ., data = College.train, scale = TRUE, validation = "CV")
-validationplot(fit.pcr, val.type = "MSEP")
+validationplot(fit.pcr, val.type = "MSEP", xlab = "Кількість змінних")
 
 cat("\n")
 print(paste('Min M: ', which.min(fit.pcr$validation$adj)))
@@ -63,7 +63,7 @@ print(paste("Test error: ", round(mean((pred.pcr - College.test$Apps)^2), 2)))
 
 # 2.6
 fit.pls = plsr(Apps ~ ., data = College.train, scale = TRUE, validation = "CV")
-validationplot(fit.pls, val.type = "MSEP")
+validationplot(fit.pls, val.type = "MSEP", xlab = "Кількість змінних")
 
 cat("\n")
 print(paste('Min M: ', which.min(fit.pls$validation$adj)))

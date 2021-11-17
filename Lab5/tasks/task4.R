@@ -68,4 +68,4 @@ cat("\n")
 print(paste('Min M: ', which.min(fit.pcr$validation$adj),
  ', min CV error: ', min(fit.pcr$validation$adj)))
 
-validationplot(fit.pcr, val.type = "MSEP")
+validationplot(fit.pcr, val.type = "MSEP", xlab = "Кількість змінних")

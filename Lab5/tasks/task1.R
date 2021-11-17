@@ -19,7 +19,8 @@ data.frame = data.frame(y = y, x = x)
 BestModelSelection = function(method_, mtext_) {
     cat("\n")
     reg.fit = regsubsets(y ~ x + I(x^2) + I(x^3) + I(x^4) 
-    + I(x^5) + I(x^6) + I(x^7) + I(x^8) + I(x^9) + I(x^10), data = data.frame, nvmax = 10, method = method_)
+    + I(x^5) + I(x^6) + I(x^7) + I(x^8) + I(x^9) + I(x^10), data = data.frame,
+     nvmax = 10, method = method_)
     reg.summary = summary(reg.fit)
     print(reg.summary)
 
@@ -33,7 +34,7 @@ BestModelSelection = function(method_, mtext_) {
     points(which.min(reg.summary$bic), reg.summary$bic[which.min(reg.summary$bic)],
     col = "blue", cex = 2, pch = 20)
 
-    plot(reg.summary$adjr2, xlab = "Кiлькість змiнних", ylab = "Adjusted R^2", type = "l")
+    plot(reg.summary$adjr2, xlab = "Кiлькість змiнних", ylab = "Скорегований R^2", type = "l")
     points(which.max(reg.summary$adjr2), reg.summary$adjr2[which.max(reg.summary$adjr2)],
     col = "blue", cex = 2, pch = 20)
 
@@ -63,13 +64,13 @@ BestModelSelection = function(method_, mtext_) {
 }
 
 BestModelSelection("exhaustive",
- "Графiки C.p, BIC та скорегованого R^2")
+ "Графiки C_p, BIC та скорегованого R^2")
 
 # 1.4
 BestModelSelection("forward",
- "Графiки C.p, BIC та скорегованого R^2 для покрокового вибору вперед")
+ "Графiки C_p, BIC та скорегованого R^2 для покрокового вибору вперед")
 BestModelSelection("backward",
- "Графiки C.p, BIC та скорегованого R^2 для покрокового вибору назад")
+ "Графiки C_p, BIC та скорегованого R^2 для покрокового вибору назад")
 
 # 1.5
 cat("\n")
