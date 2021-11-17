@@ -33,10 +33,9 @@ for (i in 1:13) {
 }
 
 cat("\n")
-print(paste('Model size for min CV: ', which.min(mean.cv.errors),
- ', min CV error: ', min(mean.cv.errors)))
-plot(mean.cv.errors, xlab = "Кількість змінних", ylab = "Помилка кросвалідації",
-     col = "red", type = "b")
+paste('Model size for min CV: ', which.min(mean.cv.errors), ', min CV error: ', min(mean.cv.errors))
+plot(mean.cv.errors, xlab = "Variables amount",
+  ylab = "Cross validation error",type = "b")
 
 # lasso
 cat("\n")
@@ -46,15 +45,13 @@ y = Boston$crim
 
 cv.lasso = cv.glmnet(x, y, alpha = 1, type.measure = "mse")
 cat("\n")
-print(paste('Lasso: Min lambda: ', cv.lasso$lambda.min,
- ', min CV error: ', min(cv.lasso$cvm)))
+paste('Lasso: Min lambda: ', cv.lasso$lambda.min, ', min CV error: ', min(cv.lasso$cvm))
 plot(cv.lasso)
 
 # ridge
 cv.ridge = cv.glmnet(x, y, alpha = 0, type.measure = "mse")
 cat("\n")
-print(paste('Ridge: Min lambda: ', cv.ridge$lambda.min,
- ', min CV error: ', min(cv.ridge$cvm)))
+paste('Ridge: Min lambda: ', cv.ridge$lambda.min, ', min CV error: ', min(cv.ridge$cvm))
 plot(cv.ridge)
 
 # PCR
@@ -62,10 +59,9 @@ cat("\n")
 library(pls)
 
 fit.pcr = pcr(crim ~ ., data = Boston, scale = TRUE, validation = "CV")
-print(summary(fit.pcr))
+summary(fit.pcr)
 
 cat("\n")
-print(paste('Min M: ', which.min(fit.pcr$validation$adj),
- ', min CV error: ', min(fit.pcr$validation$adj)))
+paste('Min M: ', which.min(fit.pcr$validation$adj), ', min CV error: ', min(fit.pcr$validation$adj))
 
-validationplot(fit.pcr, val.type = "MSEP")
+validationplot(fit.pcr, val.type = "MSEP", xlab = "Variables amount")

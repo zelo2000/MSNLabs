@@ -21,10 +21,8 @@ train.mat = model.matrix(Apps ~ ., data = College.train)
 test.mat = model.matrix(Apps ~ ., data = College.test)
 
 grid = 10 ^ seq(10, -2, length = 100)
-fit.ridge = glmnet(train.mat, College.train$Apps, alpha = 0,
- lambda = grid)
-cv.ridge = cv.glmnet(train.mat, College.train$Apps, alpha = 0,
- lambda = grid, grouped = FALSE)
+fit.ridge = glmnet(train.mat, College.train$Apps, alpha = 0, lambda = grid)
+cv.ridge = cv.glmnet(train.mat, College.train$Apps, alpha = 0, lambda = grid)
 
 dim(coef(fit.ridge))
 
@@ -35,7 +33,7 @@ round(mean((pred.ridge - College.test$Apps)^2), 2)
 
 # 2.4
 fit.lasso = glmnet(train.mat, College.train$Apps, alpha = 1, lambda = grid)
-cv.lasso  = cv.glmnet(train.mat, College.train$Apps, alpha = 1, lambda = grid, grouped = FALSE)
+cv.lasso  = cv.glmnet(train.mat, College.train$Apps, alpha = 1, lambda = grid)
 
 bestlam = cv.lasso$lambda.min
 paste('Best lambda:', bestlam)
@@ -48,7 +46,7 @@ lasso_coefs
 # 2.5
 library(pls)
 fit.pcr = pcr(Apps ~ ., data = College.train, scale = TRUE, validation = "CV")
-validationplot(fit.pcr, val.type = "MSEP")
+validationplot(fit.pcr, val.type = "MSEP", xlab = "Variables amount")
 
 paste('Min M: ', which.min(fit.pcr$validation$adj))
 pred.pcr = predict(fit.pcr, College.test, ncomp = which.min(fit.pcr$validation$adj))
@@ -56,7 +54,7 @@ round(mean((pred.pcr - College.test$Apps)^2), 2)
 
 # 2.6
 fit.pls = plsr(Apps ~ ., data = College.train, scale = TRUE, validation = "CV")
-validationplot(fit.pls, val.type = "MSEP")
+validationplot(fit.pls, val.type = "MSEP", xlab = "Variables amount")
 
 paste('Min M: ', which.min(fit.pls$validation$adj))
 pred.pls = predict(fit.pls, College.test, ncomp = which.min(fit.pls$validation$adj))

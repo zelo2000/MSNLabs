@@ -28,16 +28,13 @@ BestModelSelection = function(methodName, text) {
     par(mfrow = c(2, 2))
 
     plot(reg.summary$cp, xlab = "Variables amount", ylab = "Cp", type = "l")
-    points(which.min(reg.summary$cp), reg.summary$cp[which.min(reg.summary$cp)],
-    col = "blue", cex = 2, pch = 20)
+    points(which.min(reg.summary$cp), reg.summary$cp[which.min(reg.summary$cp)], cex = 2, pch = 20)
 
     plot(reg.summary$bic, xlab = "Variables amount", ylab = "BIC", type = "l")
-    points(which.min(reg.summary$bic), reg.summary$bic[which.min(reg.summary$bic)],
-    col = "blue", cex = 2, pch = 20)
+    points(which.min(reg.summary$bic), reg.summary$bic[which.min(reg.summary$bic)], cex = 2, pch = 20)
 
     plot(reg.summary$adjr2, xlab = "Variables amount", ylab = "Adjusted R^2", type = "l")
-    points(which.max(reg.summary$adjr2), reg.summary$adjr2[which.max(reg.summary$adjr2)],
-    col = "blue", cex = 2, pch = 20)
+    points(which.max(reg.summary$adjr2), reg.summary$adjr2[which.max(reg.summary$adjr2)], cex = 2, pch = 20)
 
     mtext(text, side = 3, line = -2, outer = TRUE)
 

@@ -3,15 +3,13 @@ set.seed(1)
 x = matrix(rnorm(1000 * 20), 1000, 20)
 eps = rnorm(1000)
 
-cat("\n")
-betas = runif(20, min=-5, max=5)
-print("Beta-values list:")
+betas = runif(20, min=-2.72, max=3.14)
 
 zero_vals_num = sample(3:10, 1)
 for (i in sample(1:length(betas), zero_vals_num)) {
   betas[i] = 0
 }
-print(betas)
+betas
 
 y = x %*% betas + eps
 
@@ -32,35 +30,33 @@ reg.fit = regsubsets(y ~ .,
                      data = data.frame(y = y.train, x = x.train),
                      nvmax = 20)
 
-BestSubsetSelection = function(x_, y_, ylab_) {
-    data_ = data.frame(y = y_, x = x_)
-    mat = model.matrix(y ~ ., data = data_, nvmax = 20)
+BestSubsetSelection = function(x, y, ylab) {
+    localData = data.frame(y = y, x = x)
+    mat = model.matrix(y ~ ., data = localData, nvmax = 20)
 
     val.errors = rep(0, 20)
     for (i in 1:20) {
         coef_i = coef(reg.fit, id = i)
         pred = mat[, names(coef_i)] %*% coef_i
-        val.errors[i] = mean((pred - y_)^2)
+        val.errors[i] = mean((pred - y)^2)
     }
 
-    plot(val.errors, xlab = "Кiлькiсть предикторiв", ylab = ylab_,
-    col = "red", pch = 19, type = "b")
+    plot(val.errors, xlab = "Predictors amount", ylab = ylab, pch = 19, type = "b")
 
     return(val.errors)
 }
 
-BestSubsetSelection(x.train, y.train, "Тренувальний MSE")
+BestSubsetSelection(x.train, y.train, "Training MSE")
 
 # 3.4
-test_mse = BestSubsetSelection(x.test, y.test, "Тестовий MSE")
+test_mse = BestSubsetSelection(x.test, y.test, "Test MSE")
 
 # 3.5
-print(paste('Model size for min MSE: ', which.min(test_mse),
- ', min MSE: ', min(test_mse)))
+paste('Model size for min MSE: ', which.min(test_mse), ', min MSE: ', min(test_mse))
 
 # 3.6
 cat("\n")
-print(coef(reg.fit, which.min(test_mse)))
+coef(reg.fit, which.min(test_mse))
 
 # 3.7
 val.errors = rep(0, 20)
@@ -75,8 +71,7 @@ for (i in 1:20) {
 
 par(mfrow = c(1, 2))
 
-BestSubsetSelection(x.test, y.test, "Тестовий MSE")
+BestSubsetSelection(x.test, y.test, "Test MSE")
 
-plot(val.errors, xlab = "Кiлькiсть предикторiв",
- ylab = "Помилка між оціночними та реальними значеннями коефіцієнтів",
- col = "red", pch = 19, type = "b")
+plot(val.errors, xlab = "Predictors amount",
+ ylab = "Error between estimated and real coefficients", pch = 19, type = "b")
